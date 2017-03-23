@@ -1,0 +1,7 @@
+C:\Users\gokced\Documents\Visual Studio 2012\Projects\XmlParser\XmlParser\bin\Debug\XmlParser.exe
+C:\Users\gokced\Documents\Visual Studio 2012\Projects\XmlParser\XmlParser\bin\Debug\XmlParser.pdb
+C:\Users\gokced\Documents\Visual Studio 2012\Projects\XmlParser\XmlParser\obj\Debug\XmlParser.XmlToDatabase.resources
+C:\Users\gokced\Documents\Visual Studio 2012\Projects\XmlParser\XmlParser\obj\Debug\XmlParser.Properties.Resources.resources
+C:\Users\gokced\Documents\Visual Studio 2012\Projects\XmlParser\XmlParser\obj\Debug\XmlParser.csproj.GenerateResource.Cache
+C:\Users\gokced\Documents\Visual Studio 2012\Projects\XmlParser\XmlParser\obj\Debug\XmlParser.exe
+C:\Users\gokced\Documents\Visual Studio 2012\Projects\XmlParser\XmlParser\obj\Debug\XmlParser.pdb
