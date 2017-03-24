@@ -19,10 +19,10 @@ namespace XmlParser
         public static void CreateTable()
         {
             sqlStatement = @" 
-                            -- Create Table as GTPBR_XML_PARSER_BANKS
-                            If Not Exists (Select id From sysobjects (Nolock) Where name ='GTPBR_XML_PARSER_BANKS' And type = 'U')
+                            -- Create Table as XML_PARSER_BANKS
+                            If Not Exists (Select id From sysobjects (Nolock) Where name ='XML_PARSER_BANKS' And type = 'U')
                             BEGIN
-                            CREATE TABLE [dbo].GTPBR_XML_PARSER_BANKS (  
+                            CREATE TABLE [dbo].XML_PARSER_BANKS (  
                                             bKd varchar(300) NOT NULL PRIMARY KEY,
 				                            bAd varchar(300) NOT NULL,
 				                            bIlAd varchar(300) NOT NULL,
@@ -31,12 +31,12 @@ namespace XmlParser
 	                                        sonIslemZamani varchar(300) NOT NULL)
                             END  
                          
-                            -- Create Table as GTPBR_XML_PARSER_BRANCHS                          
-                            If Not Exists (Select id From sysobjects (Nolock) Where name ='GTPBR_XML_PARSER_BRANCHS' And type = 'U')
+                            -- Create Table as XML_PARSER_BRANCHS                          
+                            If Not Exists (Select id From sysobjects (Nolock) Where name ='XML_PARSER_BRANCHS' And type = 'U')
                             BEGIN
-                            CREATE TABLE [dbo].GTPBR_XML_PARSER_BRANCHS (  
+                            CREATE TABLE [dbo].XML_PARSER_BRANCHS (  
                                             sKd varchar(300) NOT NULL,
-				                            bKd varchar(300) NOT NULL FOREIGN KEY REFERENCES GTPBR_XML_PARSER_BANKS(bKd),
+				                            bKd varchar(300) NOT NULL FOREIGN KEY REFERENCES XML_PARSER_BANKS(bKd),
 				                            sAd varchar(300) NOT NULL,
 				                            sIlAd varchar(300),
 				                            sIlcAd varchar(300),
@@ -50,7 +50,7 @@ namespace XmlParser
 	                                        sonIslemZamani varchar(300) NOT NULL)
                             END";
 
-            using (SqlConnection connection = new SqlConnection("data source=FBSCONNECTION,1001;persist security info=True;initial catalog=gtpbrdb;User id=GTPDB;Password=GTPDB"))
+            using (SqlConnection connection = new SqlConnection("data source=yourDb;persist security info=True;initial catalog=yourcatalog;User id=yourid;Password=yourpass"))
             {
                 SqlCommand command = new SqlCommand(sqlStatement, connection);
                 connection.Open();
@@ -79,10 +79,10 @@ namespace XmlParser
         public static void GetMappingData()
         {
             sqlStatement = @" 
-                             Select X.INSTITUTION_ID, X.ATTRIB_02,I.FULL_NAME from GTPBS_INSTITUTIONS_X X(NOLOCK), GTPBS_INSTITUTIONS I (NOLOCK) where ATTRIB_02!=0 AND I.INSTITUTION_ID=X.INSTITUTION_ID              
+                             Select X.INSTITUTION_ID, X.ATT,I.FULL_NAME from INSTITUTIONS_X X(NOLOCK), INSTITUTIONS I (NOLOCK) where ATT!=0 AND I.INSTITUTION_ID=X.INSTITUTION_ID              
                             ";
 
-            using (SqlConnection connection = new SqlConnection("data source=FBSCONNECTION,1001;persist security info=True;initial catalog=gtpbrdb;User id=GTPDB;Password=GTPDB"))
+            using (SqlConnection connection = new SqlConnection("data source=yourDb;persist security info=True;initial catalog=yourcatalog;User id=yourid;Password=yourpass")
             {
                 SqlCommand command = new SqlCommand(sqlStatement, connection);
                 connection.Open();
@@ -94,15 +94,15 @@ namespace XmlParser
                         Mapping data = new Mapping();
                         data.InstitutionId = dr["INSTITUTION_ID"].ToString();
                         data.BankName = dr["FULL_NAME"].ToString(); 
-                        if (dr["ATTRIB_02"].ToString().Length == 4)
-                            data.BankCode = dr["ATTRIB_02"].ToString();
+                        if (dr["ATT"].ToString().Length == 4)
+                            data.BankCode = dr["ATT"].ToString();
                         else
                         {
-                            for(int i = dr["ATTRIB_02"].ToString().Length; i < 4; i++)
+                            for(int i = dr["ATT"].ToString().Length; i < 4; i++)
                             {
                                 data.BankCode += "0";
                             }
-                            data.BankCode += dr["ATTRIB_02"].ToString();
+                            data.BankCode += dr["ATT"].ToString();
                         }
                         mappingData.Add(data);
                     }
@@ -119,7 +119,7 @@ namespace XmlParser
             foreach (var value in values.BankaSubeleri)
             {               
                 temp = @"          
-			            Insert into GTPBR_XML_PARSER_BANKS (bKd,bAd,bIlAd,adr,sonIslemTuru, sonIslemZamani)
+			            Insert into XML_PARSER_BANKS (bKd,bAd,bIlAd,adr,sonIslemTuru, sonIslemZamani)
                         Values('@bKd','@bAd','@bIlAd','@adr','@sonIslemTuru','@sonIslemZamani')
 			    ";
 
@@ -135,7 +135,7 @@ namespace XmlParser
                 foreach (var branch in branchs)
                 {
                     temp = @"
-                          Insert into GTPBR_XML_PARSER_BRANCHS (sKd,bKd,sAd,sIlAd,sIlcAd,sIlcKd,sIlKd,tlf,adr,fks,epst,sonIslemTuru,sonIslemZamani)
+                          Insert into XML_PARSER_BRANCHS (sKd,bKd,sAd,sIlAd,sIlcAd,sIlcKd,sIlKd,tlf,adr,fks,epst,sonIslemTuru,sonIslemZamani)
                           Values('@sKd','@bKd','@sAd','@sIlAd','@sIlcAd','@sIlcKd','@sIlKd','@tlf','@adr','@fks','@epst','@sonIslemTuru','@sonIslemZamani')
                     ";
 
@@ -157,7 +157,7 @@ namespace XmlParser
 
                 try
                 {
-                    using (SqlConnection connection = new SqlConnection("data source=FBSCONNECTION,1001;persist security info=True;initial catalog=gtpbrdb;User id=GTPDB;Password=GTPDB"))
+                    using (SqlConnection connection = new SqlConnection("data source=yourDb;persist security info=True;initial catalog=yourcatalog;User id=yourid;Password=yourpass")
                     {
                         SqlCommand command = new SqlCommand(sqlStatement, connection);
                         connection.Open();

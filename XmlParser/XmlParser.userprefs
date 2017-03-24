@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{D96392C2-8B9E-4757-9939-1AD728DC8D60}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="XmlParser/XmlToDatabase.cs">
+    <Files>
+      <File FileName="XmlParser/Banka.cs" Line="1" Column="1" />
+      <File FileName="XmlParser/DbOperations.cs" Line="160" Column="182" />
+      <File FileName="XmlParser/Mapping.cs" Line="1" Column="1" />
+      <File FileName="XmlParser/Program.cs" Line="1" Column="1" />
+      <File FileName="XmlParser/XmlToDatabase.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="XmlParser" expanded="True">
+            <Node name="XmlParser" expanded="True">
+              <Node name="References" expanded="True" />
+              <Node name="XmlToDatabase.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.XmlParser PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
